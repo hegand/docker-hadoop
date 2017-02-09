@@ -7,6 +7,7 @@ ENV HADOOP_CONF_DIR ${HADOOP_HOME}/conf
 ENV PATH $PATH:$HADOOP_HOME/bin
 
 RUN set -x \
+        && apk add --no-cache openssl
         && mkdir -p ${HADOOP_HOME} \
         && cd /tmp \
         && wget https://archive.apache.org/dist/hadoop/core/${HADOOP_FULL_VERSION}/${HADOOP_FULL_VERSION}.tar.gz \
@@ -14,3 +15,5 @@ RUN set -x \
         && mv ${HADOOP_FULL_VERSION} /usr/local/hadoop
         && rm ${HADOOP_FULL_VERSION}.tar.gz
         && cd ${HADOOP_HOME}
+        && apk del openssl
+        && rm -rf /var/cache/apk/*
