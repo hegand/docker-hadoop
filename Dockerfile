@@ -9,8 +9,6 @@ ENV PATH $PATH:$HADOOP_HOME/bin
 RUN set -x \
         && mkdir -p ${HADOOP_HOME} \
         && cd /tmp \
-        && wget https://archive.apache.org/dist/hadoop/core/${HADOOP_FULL_VERSION}/${HADOOP_FULL_VERSION}.tar.gz \
-        && tar zxf ${HADOOP_FULL_VERSION}.tar.gz \
+        && wget https://archive.apache.org/dist/hadoop/core/${HADOOP_FULL_VERSION}/${HADOOP_FULL_VERSION}.tar.gz  -O - | tar -xz \
         && mv ${HADOOP_FULL_VERSION} /usr/local/hadoop \
-        && rm ${HADOOP_FULL_VERSION}.tar.gz \
         && cd ${HADOOP_HOME}
