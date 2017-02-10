@@ -14,4 +14,6 @@ RUN set -x \
         && ln -s /usr/local/${HADOOP_FULL_VERSION} ${HADOOP_HOME} \
         && rm -rf ${HADOOP_HOME}/share/doc
         
+RUN apk add --update --no-cache bash
+        
 WORKDIR ${HADOOP_HOME}
