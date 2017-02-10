@@ -4,7 +4,8 @@ ENV HADOOP_VERSION 2.7.3
 ENV HADOOP_FULL_VERSION hadoop-${HADOOP_VERSION}
 ENV HADOOP_HOME /usr/local/hadoop
 ENV HADOOP_CONF_DIR ${HADOOP_HOME}/conf
-ENV PATH $PATH:$HADOOP_HOME/bin
+ENV HADOOP_OPTS	-Djava.library.path=/usr/local/hadoop/lib/native
+ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
 RUN set -x \
         && mkdir -p /usr/local \
