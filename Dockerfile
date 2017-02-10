@@ -17,7 +17,7 @@ RUN set -x \
         
 RUN apk add --update --no-cache bash
 
-RUN adduser -D -U -s /bin/bash -d ${HADOOP_HOME} -u 1100 hadoop
+RUN adduser -D -s /bin/bash -h ${HADOOP_HOME} -u 1100 hadoop
 
 RUN mkdir -p /data
 
