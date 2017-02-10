@@ -16,5 +16,11 @@ RUN set -x \
         && rm -rf ${HADOOP_HOME}/share/doc
         
 RUN apk add --update --no-cache bash
+
+RUN adduser -D -U -s /bin/bash -d ${HADOOP_HOME} -u 1100 hadoop
+
+RUN mkdir -p /data
+
+VOLUME /data
         
 WORKDIR ${HADOOP_HOME}
