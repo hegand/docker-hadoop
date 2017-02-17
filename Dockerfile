@@ -7,16 +7,18 @@ ENV HADOOP_CONF_DIR ${HADOOP_HOME}/conf
 ENV HADOOP_OPTS	-Djava.library.path=/usr/local/hadoop/lib/native
 ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
-RUN set -x \
-        && mkdir -p /usr/local \
-        && cd /usr/local \
-        && wget https://archive.apache.org/dist/hadoop/core/${HADOOP_FULL_VERSION}/${HADOOP_FULL_VERSION}.tar.gz  -O - | tar -xz \
-        && mv ${HADOOP_FULL_VERSION} hadoop \
-        && rm -rf ${HADOOP_HOME}/share/doc
-        
 RUN apk add --update --no-cache bash
 
 RUN adduser -D -s /bin/bash -h ${HADOOP_HOME} -u 1100 hadoop
+
+RUN set -x \
+        && mkdir -p /usr/local \
+        && cd /tmp \
+        && wget https://archive.apache.org/dist/hadoop/core/${HADOOP_FULL_VERSION}/${HADOOP_FULL_VERSION}.tar.gz  -O - | tar -xz \
+        && mv ${HADOOP_FULL_VERSION} /usr/local \
+        && ln -s /usr/local/${HADOOP_FULL_VERSION} ${HADOOP_HOME} \
+        && chown -R hadoop:hadoop  ${HADOOP_HOME} \
+        && rm -rf ${HADOOP_HOME}/share/doc
 
 RUN mkdir -p /data
         
