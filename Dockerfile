@@ -11,7 +11,7 @@ RUN set -x \
         && mkdir -p /usr/local \
         && cd /usr/local \
         && wget https://archive.apache.org/dist/hadoop/core/${HADOOP_FULL_VERSION}/${HADOOP_FULL_VERSION}.tar.gz  -O - | tar -xz \
-        && mv /usr/local/${HADOOP_FULL_VERSION} ${HADOOP_HOME} \
+        && mv ${HADOOP_FULL_VERSION} hadoop \
         && rm -rf ${HADOOP_HOME}/share/doc
         
 RUN apk add --update --no-cache bash
