@@ -9,6 +9,8 @@ ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
 RUN apk add --update --no-cache bash
 
+RUN adduser -D -s /bin/bash -h ${HADOOP_HOME} -u 1100 hadoop
+
 RUN set -x \
         && mkdir -p /usr/local \
         && cd /tmp \
@@ -19,7 +21,6 @@ RUN set -x \
 
 RUN mkdir -p /data
 
-RUN adduser -D -s /bin/bash -h ${HADOOP_HOME} -u 1100 hadoop \
-    && chown -R hadoop:hadoop  ${HADOOP_HOME}/ /data
+RUN chown -R hadoop:hadoop  ${HADOOP_HOME}/ /data
 
 WORKDIR ${HADOOP_HOME}
