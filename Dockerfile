@@ -19,7 +19,7 @@ RUN set -x \
 
 RUN mkdir -p /data
 
-RUN adduser -D -s /bin/bash -u 1100 hadoop \
-    && chown -R hadoop:hadoop  ${HADOOP_HOME} /data
+RUN adduser -D -s /bin/bash -h ${HADOOP_HOME} -u 1100 hadoop \
+    && chown -R hadoop:hadoop  ${HADOOP_HOME}/ /data
 
 WORKDIR ${HADOOP_HOME}
