@@ -20,7 +20,5 @@ RUN apk add --update --no-cache bash
 RUN adduser -D -s /bin/bash -h ${HADOOP_HOME} -u 1100 hadoop
 
 RUN mkdir -p /data
-
-VOLUME /data
         
 WORKDIR ${HADOOP_HOME}
