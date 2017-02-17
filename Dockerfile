@@ -10,7 +10,7 @@ ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
 RUN apk add --update --no-cache bash
 
-RUN adduser -D -s /bin/bash -h ${HADOOP_HOME} -u 1100 hadoop
+RUN adduser -D -s /bin/bash -u 1100 hadoop
 
 RUN set -x \
         && mkdir -p /usr/local \
