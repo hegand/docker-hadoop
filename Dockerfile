@@ -17,10 +17,10 @@ RUN set -x \
         && wget https://archive.apache.org/dist/hadoop/core/${HADOOP_FULL_VERSION}/${HADOOP_FULL_VERSION}.tar.gz  -O - | tar -xz \
         && mv ${HADOOP_FULL_VERSION} /usr/local \
         && ln -s /usr/local/${HADOOP_FULL_VERSION} ${HADOOP_HOME} \
-        && rm -rf ${HADOOP_HOME}/share/doc
+        && rm -rf ${HADOOP_HOME}/share/doc \
+        && chown -R hadoop:hadoop  ${HADOOP_HOME}/
 
-RUN mkdir -p /data
-
-RUN chown -R hadoop:hadoop  ${HADOOP_HOME}/ /data
+RUN mkdir -p /data \
+    && chown -R hadoop:hadoop /data
 
 WORKDIR ${HADOOP_HOME}
