@@ -38,7 +38,7 @@ RUN set -x \
 RUN set -x \
         && cd /tmp \
         && wget http://apache.claz.org/sqoop/${HIVE_FULL_VERSION}/apache-${HIVE_FULL_VERSION}-bin.tar.gz  -O - | tar -xz \
-        && mv ${HIVE_FULL_VERSION} /usr/local \
+        && mv apache-${HIVE_FULL_VERSION}-bin /usr/local \
         && ln -s /usr/local/${HIVE_FULL_VERSION} ${HIVE_HOME} \
         && chown -R hive:hive  ${HIVE_HOME}/
         
