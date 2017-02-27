@@ -37,14 +37,14 @@ RUN set -x \
 
 RUN set -x \
         && cd /tmp \
-        && wget http://apache.claz.org/sqoop/${HIVE_FULL_VERSION}/apache-${HIVE_FULL_VERSION}-bin.tar.gz  -O - | tar -xz \
+        && wget http://apache.claz.org/hive/${HIVE_FULL_VERSION}/apache-${HIVE_FULL_VERSION}-bin.tar.gz  -O - | tar -xz \
         && mv apache-${HIVE_FULL_VERSION}-bin /usr/local \
-        && ln -s /usr/local/${HIVE_FULL_VERSION} ${HIVE_HOME} \
+        && ln -s /usr/local/apache-${HIVE_FULL_VERSION}-bin ${HIVE_HOME} \
         && chown -R hive:hive  ${HIVE_HOME}/
-        
+
 RUN set -x \
         && cd /tmp \
-        && wget http://apache.claz.org/hive/${SQOOP_VERSION}/${SQOOP_FULL_VERSION}.tar.gz  -O - | tar -xz \
+        && wget http://apache.claz.org/sqoop/${SQOOP_VERSION}/${SQOOP_FULL_VERSION}.tar.gz  -O - | tar -xz \
         && mv ${SQOOP_FULL_VERSION} /usr/local \
         && ln -s /usr/local/${SQOOP_FULL_VERSION} ${SQOOP_HOME} \
         && chown -R sqoop:sqoop  ${SQOOP_HOME}/
