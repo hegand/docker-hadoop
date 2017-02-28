@@ -1,11 +1,4 @@
-FROM hegand/jdk:openjdk8
-
-ENV HADOOP_VERSION 2.7.3
-ENV HADOOP_MAJOR_VERSION 2.7
-ENV HADOOP_FULL_VERSION hadoop-${HADOOP_VERSION}
-ENV HADOOP_HOME /usr/local/hadoop
-ENV HADOOP_CONF_DIR ${HADOOP_HOME}/conf
-ENV HADOOP_OPTS	-Djava.library.path=/usr/local/hadoop/lib/native
+FROM hegand/hadoop-base:2.7
 
 ENV HIVE_VERSION 2.1.1
 ENV HIVE_FULL_VERSION hive-${HIVE_VERSION}
@@ -16,25 +9,13 @@ ENV SQOOP_VERSION 1.4.6
 ENV SQOOP_FULL_VERSION sqoop-${SQOOP_VERSION}
 ENV SQOOP_HOME /usr/local/sqoop
 
-ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HIVE_HOME/bin:$SQOOP_HOME/bin:${HCAT_HOME}/bin
-
-RUN apk add --update --no-cache bash
+ENV PATH $PATH:$HIVE_HOME/bin:$SQOOP_HOME/bin:${HCAT_HOME}/bin
 
 RUN set -x \
-        && adduser -D -s /bin/bash -u 1100 hadoop \
         && adduser -D -s /bin/bash -u 1110 yarn \
         && adduser -D -s /bin/bash -u 1120 mapred \
         && adduser -D -s /bin/bash -u 1130 hive \
         && adduser -D -s /bin/bash -u 1140 sqoop
-
-RUN set -x \
-        && mkdir -p /usr/local \
-        && cd /tmp \
-        && wget https://archive.apache.org/dist/hadoop/core/${HADOOP_FULL_VERSION}/${HADOOP_FULL_VERSION}.tar.gz  -O - | tar -xz \
-        && mv ${HADOOP_FULL_VERSION} /usr/local \
-        && ln -s /usr/local/${HADOOP_FULL_VERSION} ${HADOOP_HOME} \
-        && rm -rf ${HADOOP_HOME}/share/doc \
-        && chown -R hadoop:hadoop  ${HADOOP_HOME}/
 
 RUN set -x \
         && cd /tmp \
@@ -63,8 +44,5 @@ RUN set -x \
        && ln -s /usr/share/java/mysql-connector-java-5.1.41-bin.jar ${HIVE_HOME}/lib/mysql-connector-java-5.1.41-bin.jar \
        && ln -s /usr/share/java/postgresql-42.0.0.jar ${SQOOP_HOME}/lib/postgresql-42.0.0.jar \
        && ln -s //usr/share/java/mysql-connector-java-5.1.41-bin.jar ${SQOOP_HOME}/lib/mysql-connector-java-5.1.41-bin.jar
-
-RUN mkdir -p /data \
-    && chown -R hadoop:hadoop /data
 
 WORKDIR ${HADOOP_HOME}
