@@ -41,13 +41,16 @@ RUN set -x \
         && wget http://apache.claz.org/hive/${HIVE_FULL_VERSION}/apache-${HIVE_FULL_VERSION}-bin.tar.gz  -O - | tar -xz \
         && mv apache-${HIVE_FULL_VERSION}-bin /usr/local \
         && ln -s /usr/local/apache-${HIVE_FULL_VERSION}-bin ${HIVE_HOME} \
+        && rm -rf ${HIVE_HOME}/examples \
         && chown -R hive:hive  ${HIVE_HOME}/
 
 RUN set -x \
         && cd /tmp \
-        && wget http://apache.claz.org/sqoop/${SQOOP_VERSION}/${SQOOP_FULL_VERSION}.tar.gz  -O - | tar -xz \
-        && mv ${SQOOP_FULL_VERSION} /usr/local \
+        && wget http://apache.claz.org/sqoop/${SQOOP_VERSION}/${SQOOP_FULL_VERSION}.bin__hadoop-2.0.4-alpha.tar.gz  -O - | tar -xz \
+        && mv ${SQOOP_FULL_VERSION}.bin__hadoop-2.0.4-alpha /usr/local \
+        && mv /usr/local/${SQOOP_FULL_VERSION}.bin__hadoop-2.0.4-alpha /usr/local/${SQOOP_FULL_VERSION} \
         && ln -s /usr/local/${SQOOP_FULL_VERSION} ${SQOOP_HOME} \
+        && rm -rf ${SQOOP_HOME}/{docs,ivy,src,testdata,sqoop-test-1.4.6.jar} \
         && chown -R sqoop:sqoop  ${SQOOP_HOME}/
         
 RUN set -x \
