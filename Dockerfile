@@ -48,6 +48,17 @@ RUN set -x \
         && mv ${SQOOP_FULL_VERSION} /usr/local \
         && ln -s /usr/local/${SQOOP_FULL_VERSION} ${SQOOP_HOME} \
         && chown -R sqoop:sqoop  ${SQOOP_HOME}/
+        
+RUN set -x \
+       && cd /usr/local/lib \
+       && wget https://jdbc.postgresql.org/download/postgresql-42.0.0.jar \
+       && wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.41.tar.gz -O - | tar -xz \
+       && mv mysql-connector-java-5.1.41/mysql-connector-java-5.1.41-bin.jar ./ \
+       && rm -rf mysql-connector-java-5.1.41 \
+       && ln -s /usr/local/lib/postgresql-42.0.0.jar ${HIVE_HOME}/lib/postgresql-42.0.0.jar \
+       && ln -s /usr/local/lib/mysql-connector-java-5.1.41-bin.jar ${HIVE_HOME}/lib/mysql-connector-java-5.1.41-bin.jar \
+       && ln -s /usr/local/lib/postgresql-42.0.0.jar ${SQOOP_HOME}/lib/postgresql-42.0.0.jar \
+       && ln -s /usr/local/lib/mysql-connector-java-5.1.41-bin.jar ${SQOOP_HOME}/lib/mysql-connector-java-5.1.41-bin.jar
 
 RUN mkdir -p /data \
     && chown -R hadoop:hadoop /data
