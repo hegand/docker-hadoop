@@ -20,6 +20,12 @@ RUN set -x \
         && ln -s /usr/local/${HADOOP_FULL_VERSION} ${HADOOP_HOME} \
         && rm -rf ${HADOOP_HOME}/share/doc \
         && chown -R hadoop:hadoop  ${HADOOP_HOME}/
+        
+RUN set -x \
+        && mkdir -p /usr/share/java \
+        && cd /usr/share/java \
+        && wget http://central.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.2.6/snappy-java-1.1.2.6.jar \
+        && ln -s /usr/share/java/snappy-java-1.1.2.6.jar /usr/share/java/snappy-java.jar
 
 RUN mkdir -p /data \
     && chown -R hadoop:hadoop /data
