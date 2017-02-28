@@ -10,12 +10,13 @@ ENV HADOOP_OPTS	-Djava.library.path=/usr/local/hadoop/lib/native
 ENV HIVE_VERSION 2.1.1
 ENV HIVE_FULL_VERSION hive-${HIVE_VERSION}
 ENV HIVE_HOME /usr/local/hive
+ENV HCAT_HOME ${HIVE_HOME}/hcatalog
 
 ENV SQOOP_VERSION 1.4.6
 ENV SQOOP_FULL_VERSION sqoop-${SQOOP_VERSION}
 ENV SQOOP_HOME /usr/local/sqoop
 
-ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HIVE_HOME/bin:$SQOOP_HOME/bin
+ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HIVE_HOME/bin:$SQOOP_HOME/bin:${HCAT_HOME}/bin
 
 RUN apk add --update --no-cache bash
 
