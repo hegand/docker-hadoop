@@ -8,6 +8,8 @@ ENV HADOOP_CONF_DIR ${HADOOP_HOME}/conf
 ENV HADOOP_OPTS	-Djava.library.path=$HADOOP_HOME/lib/native
 ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
+ENV SNAPPY_VERSION 1.0.5
+
 RUN apk add --update --no-cache bash
 
 RUN adduser -D -s /bin/bash -u 1100 hadoop
@@ -24,10 +26,10 @@ RUN set -x \
 RUN set -x \
         && mkdir -p /usr/share/java \
         && cd /usr/share/java \
-        && wget http://central.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.2.6/snappy-java-1.1.2.6.jar \
-        && ln -s /usr/share/java/snappy-java-1.1.2.6.jar /usr/share/java/snappy-java.jar \
-        && ln -s /usr/share/java/snappy-java-1.1.2.6.jar $HADOOP_HOME/share/hadoop/hdfs/lib/snappy-java-1.1.2.6.jar \
-        && ln -s /usr/share/java/snappy-java-1.1.2.6.jar $HADOOP_HOME/share/hadoop/yarn/lib/snappy-java-1.1.2.6.jar
+        && wget http://central.maven.org/maven2/org/xerial/snappy/snappy-java/${SNAPPY_VERSION}/snappy-java-${SNAPPY_VERSION}.jar \
+        && ln -s /usr/share/java/snappy-java-${SNAPPY_VERSION}.jar /usr/share/java/snappy-java.jar \
+        && ln -s /usr/share/java/snappy-java-${SNAPPY_VERSION}.jar $HADOOP_HOME/share/hadoop/hdfs/lib/snappy-java-${SNAPPY_VERSION}.jar \
+        && ln -s /usr/share/java/snappy-java-${SNAPPY_VERSION}.jar $HADOOP_HOME/share/hadoop/yarn/lib/snappy-java-${SNAPPY_VERSION}.jar
 
 RUN mkdir -p /data \
     && chown -R hadoop:hadoop /data
