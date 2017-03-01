@@ -43,6 +43,6 @@ RUN set -x \
        && ln -s /usr/share/java/postgresql-42.0.0.jar ${HIVE_HOME}/lib/postgresql-42.0.0.jar \
        && ln -s /usr/share/java/mysql-connector-java-5.1.41-bin.jar ${HIVE_HOME}/lib/mysql-connector-java-5.1.41-bin.jar \
        && ln -s /usr/share/java/postgresql-42.0.0.jar ${SQOOP_HOME}/lib/postgresql-42.0.0.jar \
-       && ln -s //usr/share/java/mysql-connector-java-5.1.41-bin.jar ${SQOOP_HOME}/lib/mysql-connector-java-5.1.41-bin.jar
+       && ln -s /usr/share/java/mysql-connector-java-5.1.41-bin.jar ${SQOOP_HOME}/lib/mysql-connector-java-5.1.41-bin.jar
 
 WORKDIR ${HADOOP_HOME}
