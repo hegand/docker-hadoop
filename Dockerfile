@@ -8,7 +8,7 @@ ENV HADOOP_CONF_DIR ${HADOOP_HOME}/conf
 ENV HADOOP_OPTS	-Djava.library.path=/usr/local/hadoop/lib/native
 ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
-ENV SANPPY_VERSION 1.0.5
+ENV SNAPPY_VERSION 1.0.5
 
 RUN apk add --update --no-cache bash
 
