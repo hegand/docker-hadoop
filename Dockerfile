@@ -35,6 +35,7 @@ RUN set -x \
         && chown -R sqoop:sqoop  ${SQOOP_HOME}/
         
 RUN set -x \
+       && mkdir -p /usr/share/java \
        && cd /usr/share/java \
        && wget https://jdbc.postgresql.org/download/postgresql-42.0.0.jar \
        && wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.41.tar.gz -O - | tar -xz \
