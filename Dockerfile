@@ -8,7 +8,8 @@ ENV HADOOP_CONF_DIR ${HADOOP_HOME}/conf
 ENV HADOOP_OPTS	-Djava.library.path=$HADOOP_HOME/lib/native
 ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
-RUN apk add --update --no-cache bash
+RUN apk add --update --no-cache bash ca-certificates openssl \
+        && update-ca-certificates
 
 RUN adduser -D -s /bin/bash -u 1100 hadoop
 
